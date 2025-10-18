@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  anime-upscale:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: stevedk2l/upscale4k:latest
+    container_name: anime-upscale
+    restart: always
+    volumes:
+      - /mnt/TV/upscale_source:/input:ro
+      - /mnt/TV/upscale_target:/output
+    environment:
+      SCAN_INTERVAL: 3600   # check once per hour
+      DENOISE: 2
+      SCALE: 4
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+
